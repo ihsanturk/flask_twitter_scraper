@@ -1,6 +1,7 @@
 ## Instalation
 
 pip3 install -r ./requirements.txt
+
 python3 twiter_scraper.py
 
 ### Params user, pages = 1
