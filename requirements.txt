@@ -1,0 +1,4 @@
+Flask
+twitter_scraper
+httplib2
+request
