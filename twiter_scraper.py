@@ -1,8 +1,9 @@
+#!/usr/bin/env python3
 from flask import Flask, render_template, request, redirect, jsonify, \
     url_for, flash
 import sys
-import twitter_scraper
 from twitter_scraper import get_tweets
+from twitter_scraper import Profile
 import json
 import datetime
 import random
@@ -18,16 +19,20 @@ def default(obj):
     if isinstance(obj, (datetime.date, datetime.datetime)):
         return obj.isoformat()
 
-# Display all things
-@app.route('/api/twitter')
-def showMain():
+# profile
+@app.route('/api/profile')
+def profile():
+    user = request.args.get('user', default = 'crypto_rand', type = str)
+    return json.dumps(Profile(user).to_dict(), default=default)
+
+# tweets
+@app.route('/api/tweets')
+def tweets():
     pages = request.args.get('pages', default = 1, type = int)
     user = request.args.get('user', default = 'crypto_rand', type = str)
     userTweets = []
     for tweet in get_tweets(user, pages):
         userTweets.append(tweet)
-
-
     return json.dumps(userTweets, default=default)
 
 if __name__ == '__main__':
