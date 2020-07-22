@@ -1,4 +1,4 @@
 Flask
-twitter_scraper
+requests
 httplib2
-request
+twitter_scraper
